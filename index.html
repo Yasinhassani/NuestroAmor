@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Nuestra historia en segundos</title>
+  <title>Nuestra historia en fotos</title>
   <style>
     body {
       margin: 0;
@@ -28,7 +28,7 @@
 
     .slideshow-container {
       display: inline-flex;
-      animation: scroll 60s linear infinite;
+      animation: scroll 120s linear infinite;
     }
 
     .slideshow-container img {
@@ -41,85 +41,28 @@
       0% { transform: translateX(100%); }
       100% { transform: translateX(-100%); }
     }
-
-    /* Timer */
-    #timer {
-      font-size: 24px;
-      font-weight: bold;
-    }
-
-    .unit {
-      display: inline-block;
-      margin: 0 8px;
-    }
-
-    .label {
-      display: block;
-      font-size: 14px;
-      color: #ccc;
-    }
   </style>
 </head>
 <body>
 
-  <h1>Nuestra historia en segundos</h1>
+  <h1>Nuestra historia en fotos</h1>
 
-  <!-- Slideshow -->
   <div class="wrapper">
-    <div class="slideshow-container">
-      <!-- Only show sample 10; add more up to 243 if needed -->
-      <img src="images/img1.jpg" />
-      <img src="images/img2.jpg" />
-      <img src="images/img3.jpg" />
-      <img src="images/img4.jpg" />
-      <img src="images/img5.jpg" />
-      <img src="images/img6.jpg" />
-      <img src="images/img7.jpg" />
-      <img src="images/img8.jpg" />
-      <img src="images/img9.jpg" />
-      <img src="images/img10.jpg" />
+    <div class="slideshow-container" id="slideshow">
+      <!-- Images will be inserted here with JS -->
     </div>
   </div>
 
-  <!-- Count-Up Timer -->
-  <div id="timer">
-    <div class="unit"><span id="years">0</span><div class="label">Años</div></div>
-    <div class="unit"><span id="months">0</span><div class="label">Meses</div></div>
-    <div class="unit"><span id="days">0</span><div class="label">Días</div></div>
-    <div class="unit"><span id="hours">0</span><div class="label">Horas</div></div>
-    <div class="unit"><span id="minutes">0</span><div class="label">Minutos</div></div>
-    <div class="unit"><span id="seconds">0</span><div class="label">Segundos</div></div>
-  </div>
-
   <script>
-    const startDate = new Date("2024-04-20T00:00:00");
-
-    function updateTimer() {
-      const now = new Date();
-      let delta = Math.floor((now - startDate) / 1000);
-
-      const seconds = delta % 60;
-      delta = Math.floor(delta / 60);
-      const minutes = delta % 60;
-      delta = Math.floor(delta / 60);
-      const hours = delta % 24;
-      delta = Math.floor(delta / 24);
-
-      const daysTotal = delta;
-      const years = Math.floor(daysTotal / 365);
-      const months = Math.floor((daysTotal % 365) / 30);
-      const days = (daysTotal % 365) % 30;
-
-      document.getElementById("years").textContent = years;
-      document.getElementById("months").textContent = months;
-      document.getElementById("days").textContent = days;
-      document.getElementById("hours").textContent = hours;
-      document.getElementById("minutes").textContent = minutes;
-      document.getElementById("seconds").textContent = seconds;
+    const slideshow = document.getElementById('slideshow');
+    const totalImages = 243; // Number of your images
+    for (let i = 1; i <= totalImages; i++) {
+      const img = document.createElement('img');
+      img.src = `images/img${i}.jpg`;
+      img.alt = `Foto ${i}`;
+      slideshow.appendChild(img);
     }
-
-    setInterval(updateTimer, 1000);
-    updateTimer();
   </script>
+
 </body>
 </html>
