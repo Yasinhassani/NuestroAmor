@@ -1,68 +1,62 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Nuestra historia en fotos</title>
+  <title>Slideshow</title>
   <style>
     body {
       margin: 0;
-      padding: 20px;
-      font-family: Arial, sans-serif;
-      background: transparent;
-      color: #fff;
-      text-align: center;
-    }
-
-    h1 {
-      margin-bottom: 10px;
-    }
-
-    /* Slideshow */
-    .wrapper {
+      background: black;
       overflow: hidden;
-      white-space: nowrap;
-      width: 100vw;
-      margin-bottom: 40px;
     }
 
-    .slideshow-container {
-      display: inline-flex;
+    .slider {
+      display: flex;
+      width: max-content;
       animation: scroll 120s linear infinite;
     }
 
-    .slideshow-container img {
-      height: 200px;
+    .slider img {
+      height: 100vh;
+      width: auto;
       margin-right: 10px;
-      border-radius: 12px;
+      object-fit: cover;
     }
 
     @keyframes scroll {
-      0% { transform: translateX(100%); }
-      100% { transform: translateX(-100%); }
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .container {
+      display: flex;
+      width: 100vw;
+      overflow: hidden;
     }
   </style>
 </head>
 <body>
-
-  <h1>Nuestra historia en fotos</h1>
-
-  <div class="wrapper">
-    <div class="slideshow-container" id="slideshow">
-      <!-- Images will be inserted here with JS -->
-    </div>
+  <div class="container">
+    <div class="slider" id="slider"></div>
   </div>
 
   <script>
-    const slideshow = document.getElementById('slideshow');
-    const totalImages = 243; // Number of your images
+    const totalImages = 242;
+    const slider = document.getElementById("slider");
+
     for (let i = 1; i <= totalImages; i++) {
-      const img = document.createElement('img');
+      const img = document.createElement("img");
       img.src = `images/img${i}.jpg`;
-      img.alt = `Foto ${i}`;
-      slideshow.appendChild(img);
+      slider.appendChild(img);
+    }
+
+    // Duplicate to make the animation smooth
+    for (let i = 1; i <= totalImages; i++) {
+      const img = document.createElement("img");
+      img.src = `images/img${i}.jpg`;
+      slider.appendChild(img);
     }
   </script>
-
 </body>
 </html>
