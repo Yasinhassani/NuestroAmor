@@ -1,72 +1,125 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Nuestra historia</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nuestra historia en segundos</title>
   <style>
     body {
       margin: 0;
+      padding: 20px;
+      font-family: Arial, sans-serif;
       background: transparent;
-      font-family: 'Arial', sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      padding-top: 40px;
+      color: #fff;
+      text-align: center;
     }
 
     h1 {
-      color: #b71c5a;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
     }
 
-    .timer {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-bottom: 60px;
-    }
-
-    .box {
-      background-color: #f9c8d3;
-      border-radius: 10px;
-      padding: 20px 15px;
-      text-align: center;
-      width: 90px;
-    }
-
-    .box .number {
-      font-size: 28px;
-      font-weight: bold;
-      color: #7b0935;
-    }
-
-    .box .label {
-      font-size: 14px;
-      color: #7b0935;
-    }
-
-    .slider-wrapper {
-      white-space: nowrap;
+    /* Slideshow */
+    .wrapper {
       overflow: hidden;
-      width: 100%;
-    }
-
-    .slider-track {
-      display: inline-block;
       white-space: nowrap;
-      animation: scroll 180s linear infinite;
+      width: 100vw;
+      margin-bottom: 40px;
     }
 
-    .slider-track img {
-      width: 200px;
+    .slideshow-container {
+      display: inline-flex;
+      animation: scroll 60s linear infinite;
+    }
+
+    .slideshow-container img {
+      height: 200px;
       margin-right: 10px;
-      border-radius: 10px;
-      object-fit: cover;
+      border-radius: 12px;
     }
 
     @keyframes scroll {
       0% { transform: translateX(100%); }
       100% { transform: translateX(-100%); }
     }
+
+    /* Timer */
+    #timer {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .unit {
+      display: inline-block;
+      margin: 0 8px;
+    }
+
+    .label {
+      display: block;
+      font-size: 14px;
+      color: #ccc;
+    }
   </style>
+</head>
+<body>
+
+  <h1>Nuestra historia en segundos</h1>
+
+  <!-- Slideshow -->
+  <div class="wrapper">
+    <div class="slideshow-container">
+      <!-- Only show sample 10; add more up to 243 if needed -->
+      <img src="images/img1.jpg" />
+      <img src="images/img2.jpg" />
+      <img src="images/img3.jpg" />
+      <img src="images/img4.jpg" />
+      <img src="images/img5.jpg" />
+      <img src="images/img6.jpg" />
+      <img src="images/img7.jpg" />
+      <img src="images/img8.jpg" />
+      <img src="images/img9.jpg" />
+      <img src="images/img10.jpg" />
+    </div>
+  </div>
+
+  <!-- Count-Up Timer -->
+  <div id="timer">
+    <div class="unit"><span id="years">0</span><div class="label">Años</div></div>
+    <div class="unit"><span id="months">0</span><div class="label">Meses</div></div>
+    <div class="unit"><span id="days">0</span><div class="label">Días</div></div>
+    <div class="unit"><span id="hours">0</span><div class="label">Horas</div></div>
+    <div class="unit"><span id="minutes">0</span><div class="label">Minutos</div></div>
+    <div class="unit"><span id="seconds">0</span><div class="label">Segundos</div></div>
+  </div>
+
+  <script>
+    const startDate = new Date("2024-04-20T00:00:00");
+
+    function updateTimer() {
+      const now = new Date();
+      let delta = Math.floor((now - startDate) / 1000);
+
+      const seconds = delta % 60;
+      delta = Math.floor(delta / 60);
+      const minutes = delta % 60;
+      delta = Math.floor(delta / 60);
+      const hours = delta % 24;
+      delta = Math.floor(delta / 24);
+
+      const daysTotal = delta;
+      const years = Math.floor(daysTotal / 365);
+      const months = Math.floor((daysTotal % 365) / 30);
+      const days = (daysTotal % 365) % 30;
+
+      document.getElementById("years").textContent = years;
+      document.getElementById("months").textContent = months;
+      document.getElementById("days").textContent = days;
+      document.getElementById("hours").textContent = hours;
+      document.getElementById("minutes").textContent = minutes;
+      document.getElementById("seconds").textContent = seconds;
+    }
+
+    setInterval(updateTimer, 1000);
+    updateTimer();
+  </script>
+</body>
+</html>
