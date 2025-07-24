@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Slideshow Banner</title>
 
-  <!-- Preload the first few images to speed up visible start -->
+  <!-- Preload first few images -->
   <link rel="preload" as="image" href="images/img1.jpg">
   <link rel="preload" as="image" href="images/img2.jpg">
   <link rel="preload" as="image" href="images/img3.jpg">
@@ -56,18 +56,24 @@
     const totalImages = 242;
     const slider = document.getElementById("slider");
 
-    for (let i = 1; i <= totalImages; i++) {
-      const img = document.createElement("img");
-      img.loading = "lazy"; // Improve initial page load
-      img.src = `images/img${i}.jpg`;
-      slider.appendChild(img);
-    }
-
-    for (let i = 1; i <= totalImages; i++) {
+    function createImg(i) {
       const img = document.createElement("img");
       img.loading = "lazy";
       img.src = `images/img${i}.jpg`;
-      slider.appendChild(img);
+      img.alt = `img${i}`;
+      img.onerror = function () {
+        this.onerror = null;
+        this.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Love_Heart_SVG.svg/1024px-Love_Heart_SVG.svg.png"; // 💖 fallback image
+      };
+      return img;
+    }
+
+    for (let i = 1; i <= totalImages; i++) {
+      slider.appendChild(createImg(i));
+    }
+
+    for (let i = 1; i <= totalImages; i++) {
+      slider.appendChild(createImg(i));
     }
   </script>
 </body>
