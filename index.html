@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Love Timer</title>
+  <style>
+    body {
+      background-color: #fdf0f5;
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    h1 {
+      color: #b71c5a;
+      margin-bottom: 30px;
+    }
+
+    .timer {
+      display: flex;
+      gap: 10px;
+    }
+
+    .box {
+      background-color: #f9c8d3;
+      border-radius: 10px;
+      padding: 20px 15px;
+      text-align: center;
+      width: 90px;
+    }
+
+    .box .number {
+      font-size: 28px;
+      font-weight: bold;
+      color: #7b0935;
+    }
+
+    .box .label {
+      font-size: 14px;
+      color: #7b0935;
+    }
+  </style>
+</head>
+<body>
+  <h1>Desde que empezó nuestro amor 💖</h1>
+  <div class="timer">
+    <div class="box">
+      <div class="number" id="years">00</div>
+      <div class="label">Años</div>
+    </div>
+    <div class="box">
+      <div class="number" id="months">00</div>
+      <div class="label">Meses</div>
+    </div>
+    <div class="box">
+      <div class="number" id="days">00</div>
+      <div class="label">Días</div>
+    </div>
+    <div class="box">
+      <div class="number" id="hours">00</div>
+      <div class="label">Horas</div>
+    </div>
+    <div class="box">
+      <div class="number" id="minutes">00</div>
+      <div class="label">Minutos</div>
+    </div>
+    <div class="box">
+      <div class="number" id="seconds">00</div>
+      <div class="label">Segundos</div>
+    </div>
+  </div>
+
+  <script>
+    const startDate = new Date("2022-12-15T00:00:00"); // Change to your actual date
+
+    function updateTimer() {
+      const now = new Date();
+      let diff = now - startDate;
+
+      const seconds = Math.floor(diff / 1000);
+      const minutes = Math.floor(seconds / 60);
+      const hours = Math.floor(minutes / 60);
+      const days = Math.floor(hours / 24);
+      const months = Math.floor(days / 30.4375);
+      const years = Math.floor(months / 12);
+
+      const remMonths = months % 12;
+      const remDays = days % 30.4375 | 0;
+      const remHours = hours % 24;
+      const remMinutes = minutes % 60;
+      const remSeconds = seconds % 60;
+
+      document.getElementById('years').innerText = String(years).padStart(2, '0');
+      document.getElementById('months').innerText = String(remMonths).padStart(2, '0');
+      document.getElementById('days').innerText = String(remDays).padStart(2, '0');
+      document.getElementById('hours').innerText = String(remHours).padStart(2, '0');
+      document.getElementById('minutes').innerText = String(remMinutes).padStart(2, '0');
+      document.getElementById('seconds').innerText = String(remSeconds).padStart(2, '0');
+    }
+
+    setInterval(updateTimer, 1000);
+    updateTimer();
+  </script>
+</body>
+</html>
