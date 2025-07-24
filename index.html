@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Slideshow</title>
+  <title>Slideshow Banner</title>
   <style>
     body {
       margin: 0;
@@ -11,28 +11,32 @@
       overflow: hidden;
     }
 
+    .container {
+      display: flex;
+      width: 100vw;
+      overflow: hidden;
+      justify-content: center;
+      align-items: center;
+      background-color: black;
+    }
+
     .slider {
       display: flex;
       width: max-content;
-      animation: scroll 120s linear infinite;
+      animation: scroll 180s linear infinite; /* slower scroll */
     }
 
     .slider img {
-      height: 100vh;
+      height: 130px; /* smaller like your count-up timer */
       width: auto;
       margin-right: 10px;
-      object-fit: cover;
+      object-fit: contain;
+      border-radius: 8px;
     }
 
     @keyframes scroll {
       0% { transform: translateX(0); }
       100% { transform: translateX(-50%); }
-    }
-
-    .container {
-      display: flex;
-      width: 100vw;
-      overflow: hidden;
     }
   </style>
 </head>
@@ -51,7 +55,7 @@
       slider.appendChild(img);
     }
 
-    // Duplicate to make the animation smooth
+    // Duplicate for infinite scroll
     for (let i = 1; i <= totalImages; i++) {
       const img = document.createElement("img");
       img.src = `images/img${i}.jpg`;
