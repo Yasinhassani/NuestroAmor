@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Love Timer</title>
+  <title>Nuestra historia en segundos</title>
   <style>
     body {
-      background-color: #fdf0f5;
+      background-color: transparent;
       font-family: 'Arial', sans-serif;
       display: flex;
       flex-direction: column;
@@ -23,6 +23,7 @@
     .timer {
       display: flex;
       gap: 10px;
+      flex-wrap: wrap;
     }
 
     .box {
@@ -46,7 +47,7 @@
   </style>
 </head>
 <body>
-  <h1>Desde que empezó nuestro amor 💖</h1>
+  <h1>Nuestra historia en segundos 💘</h1>
   <div class="timer">
     <div class="box">
       <div class="number" id="years">00</div>
@@ -75,7 +76,7 @@
   </div>
 
   <script>
-    const startDate = new Date("2022-12-15T00:00:00"); // Change to your actual date
+    const startDate = new Date("2024-04-20T00:00:00");
 
     function updateTimer() {
       const now = new Date();
